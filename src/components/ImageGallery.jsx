@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import { toast } from 'react-toastify';
 import { Component } from 'react';
 import { Modal } from './modal/modal';
 import './styles.css';
 import { ImageGalleryItem } from './ImageGalleryItem';
 import { LoadMore } from './Button';
+import ToastWarning from './ToastWarning';
 
 const API_KEY = '27863078-b4a956cfdf1b52b765bed6289';
 
@@ -38,15 +38,7 @@ export default class Search extends Component {
     const thisPage = this.state.page;
     const searchWord = this.props.onSearch.trim();
     if (!searchWord) {
-      return toast.warn('Type something first', {
-        position: 'top-center',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      return ToastWarning('Type something first');
     }
     // console.log(prevPage, thisPage);
     if (prevName !== thisName || prevPage < thisPage) {
@@ -70,15 +62,7 @@ export default class Search extends Component {
             });
             this.setState({ loading: false });
             if (pictures.hits.length === 0) {
-              return toast.warn('Nothing was found', {
-                position: 'top-center',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
+              return ToastWarning('Nothing was found');
             }
             return;
           }
