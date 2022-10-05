@@ -2,18 +2,16 @@
 import { Component } from 'react';
 import { Modal__backdrop, Modal__content } from './modal.styled';
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 
 const modalRoot = document.querySelector('#modal-root');
 
 export class Modal extends Component {
   componentDidMount() {
-    // console.log('Modal componentDidMount');
-
     window.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    console.log('Modal componentWillUnmount');
     window.removeEventListener('keydown', this.handleKeyDown);
   }
 
@@ -31,12 +29,15 @@ export class Modal extends Component {
   };
 
   render() {
-    // console.log(this.props.children);
     return createPortal(
       <Modal__backdrop onClick={this.handleBackdropClick}>
-        <Modal__content>{this.props.children}</Modal__content>
+        <Modal__content>{this.props.largeURL}</Modal__content>
       </Modal__backdrop>,
       modalRoot
     );
   }
 }
+
+Modal.propTypes = {
+  largeURL: PropTypes.object.isRequired,
+};

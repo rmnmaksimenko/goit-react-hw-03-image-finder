@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 export function ImageGalleryItem(pic) {
+  // console.log(pic.setLargeUrl);
   return (
     <li>
       {
@@ -11,7 +12,11 @@ export function ImageGalleryItem(pic) {
           width="300"
           alt=""
           large={pic.largeImageURL}
-          onClick={pic.toggleModal}
+          onClick={function () {
+            pic.toggleModal();
+            console.log(pic.setLargeUrl);
+            pic.setLargeUrl(pic.largeImageURL);
+          }}
         />
       }
     </li>
@@ -24,6 +29,7 @@ ImageGalleryItem.propTypes = {
       webformatURL: PropTypes.string.isRequired,
       largeImageURL: PropTypes.string.isRequired,
       toggleModal: PropTypes.func.isRequired,
+      setLargeUrl: PropTypes.func.isRequired,
     })
   ),
 };

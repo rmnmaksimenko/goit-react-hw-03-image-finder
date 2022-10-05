@@ -18,10 +18,7 @@ export default class Search extends Component {
     loading: false,
   };
 
-  toggleModal = e => {
-    if (e) {
-      this.setState({ largeURL: e.currentTarget.attributes.large.textContent });
-    }
+  toggleModal = () => {
     this.setState(({ showModal }) => ({
       showModal: !showModal,
     }));
@@ -75,6 +72,10 @@ export default class Search extends Component {
     }
   }
 
+  setLargeUrl = largeURL => {
+    this.setState({ largeURL: largeURL });
+  };
+
   render() {
     const { showModal } = this.state;
     // console.log(this.state.pictures);
@@ -104,6 +105,7 @@ export default class Search extends Component {
                   webformatURL={pic.webformatURL}
                   largeImageURL={pic.largeImageURL}
                   toggleModal={this.toggleModal}
+                  setLargeUrl={this.setLargeUrl}
                 />
               );
             })}
@@ -118,9 +120,10 @@ export default class Search extends Component {
           </h2>
         ) : null}
         {showModal && (
-          <Modal onCloseModal={this.toggleModal}>
-            {<img src={this.state.largeURL} alt="" />}
-          </Modal>
+          <Modal
+            onCloseModal={this.toggleModal}
+            largeURL={<img src={this.state.largeURL} alt="" />}
+          ></Modal>
         )}
       </div>
     );
