@@ -14,7 +14,6 @@ export function ImageGalleryItem(pic) {
           large={pic.largeImageURL}
           onClick={function () {
             pic.toggleModal();
-            console.log(pic.setLargeUrl);
             pic.setLargeUrl(pic.largeImageURL);
           }}
         />
